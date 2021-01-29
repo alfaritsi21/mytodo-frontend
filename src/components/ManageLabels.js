@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import TodoForm from './TodoForm';
+import LabelForm from './LabelForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+const ManageUser = ({ labels, updateLabel, removeLabel, updateTodo }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ''
@@ -18,27 +18,27 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   };
 
   if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
+    return <LabelForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return todos.map((todo, index) => (
+  return labels.map((labels, index) => (
     <div
-      className={todo.completed ? 'todo-row complete' : 'todo-row'}
+      className={labels.completed ? 'todo-row complete' : 'todo-row'}
       key={index}
     >
-      <div key={index} >
-        {todo.label.toUpperCase()}
+      <div key={index}>
+        {labels.label.toUpperCase()}
       </div>
       <div key={index}>
-        {todo.task}
+        {labels.desc}
       </div>
       <div className='icons'>
         <RiCloseCircleLine
-          onClick={() => removeTodo(todo.id)}
+          onClick={() => removeLabel(labels.id)}
           className='delete-icon'
         />
         <TiEdit
-          onClick={() => completeTodo(todo.id)}
+          onClick={() => updateLabel(labels)}
           className='edit-icon'
         />
       </div>
@@ -46,4 +46,4 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   ));
 };
 
-export default Todo;
+export default ManageUser;
